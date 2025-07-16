@@ -1,5 +1,154 @@
 
 // Enhanced Product data with detailed specifications
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePageContent();
+        });
+
+        function initializePageContent() {
+            // Navigation menu
+            const navMenu = document.getElementById('nav-menu');
+            const menuItems = [
+                { href: '#', onclick: 'showSection(\'home\')', id: 'nav-home', text: 'TRANG CHỦ' },
+                { href: '#', onclick: 'showProducts(\'cua-chinh\')', id: 'nav-cua-chinh', text: 'CỬA CHÍNH' },
+                { href: '#', onclick: 'showProducts(\'cua-phu\')', id: 'nav-cua-phu', text: 'CỬA PHỤ' },
+                { href: '#', onclick: 'showProducts(\'cua-so\')', id: 'nav-cua-so', text: 'CỬA SỔ' },
+                { href: '#', onclick: 'showProducts(\'tu\')', id: 'nav-cua-phong', text: 'TỦ' },
+                { href: '#', onclick: 'showProducts(\'cua-khac\')', id: 'nav-cua-khac', text: 'CỬA KHÁC' }
+            ];
+
+            menuItems.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${item.href}" onclick="${item.onclick}" id="${item.id}">${item.text}</a>`;
+                navMenu.appendChild(li);
+            });
+
+            // Hero animations
+            const heroAnimations = document.getElementById('hero-animations');
+            heroAnimations.innerHTML = `
+                <div class="fish">
+                    ${'<div class="koiCoil"></div>'.repeat(10)}
+                </div>
+                <div class="fish">
+                    ${'<div class="koiCoil"></div>'.repeat(10)}
+                </div>
+                <div class="snowflakes">
+                    ${'<div class="snowflake">❄</div><div class="snowflake">❅</div><div class="snowflake">❆</div>'.repeat(3)}
+                    <div class="snowflake">❄</div>
+                </div>
+                <div class="floating-elements">
+                    ${'<div class="floating-element"></div>'.repeat(10)}
+                </div>
+            `;
+
+            // Hero CTA buttons
+            const heroCTA = document.getElementById('hero-cta');
+            heroCTA.innerHTML = `
+                <a href="javascript:void(0);" class="hero-btn primary" onclick="openServiceDetail('pricing')">
+                    <span class="hero-btn-icon">🏠</span>
+                    Xem Bảng Giá
+                </a>
+                <a href="https://zalo.me/0799040616" target="_blank" class="hero-btn">
+                    <span class="hero-btn-icon">💬</span>
+                    Liên Hệ Qua Zalo
+                </a>
+            `;
+
+            // Center content
+            const centerContent = document.getElementById('center-content-text');
+            centerContent.textContent = 'Với hơn 10 năm kinh nghiệm trong ngành, Hoàng Anh Owin tự hào là đơn vị hàng đầu trong lĩnh vực thiết kế, sản xuất và lắp đặt các loại cửa kính nhôm cao cấp. Chúng tôi cam kết mang đến cho khách hàng những sản phẩm chất lượng nhất với giá cả cạnh tranh nhất trên thị trường.';
+
+            // Services grid
+            const servicesGrid = document.getElementById('services-grid');
+            const services = [
+                {
+                    icon: '💰',
+                    title: 'BẢNG GIÁ CHUNG',
+                    description: 'Bảng giá được cập nhật thường xuyên và chuẩn nhất',
+                    onclick: 'openServiceDetail(\'pricing\')'
+                },
+                {
+                    icon: '🚚',
+                    title: 'HỖ TRỢ VẬN CHUYỂN',
+                    description: 'Hoàng Anh Owin luôn có những chính sách vận chuyển tốt nhất',
+                    onclick: 'openServiceDetail(\'shipping\')'
+                },
+                {
+                    icon: '📞',
+                    title: 'TƯ VẤN MIỄN PHÍ 24/24',
+                    description: 'Luôn có bộ phận kỹ thuật để hỗ trợ tư vấn',
+                    onclick: 'openServiceDetail(\'support\')'
+                }
+            ];
+
+            services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.onclick = () => eval(service.onclick);
+                card.innerHTML = `
+                    <div class="service-icon">${service.icon}</div>
+                    <h3>${service.title}</h3>
+                    <p>${service.description}</p>
+                `;
+                servicesGrid.appendChild(card);
+            });
+
+            // Company info
+            const infoGrid = document.getElementById('info-grid');
+            infoGrid.innerHTML = `
+                <div class="info-card">
+                    <div class="info-image">
+                        <img src="assets/images/nha.jpg" alt="Showroom Hoàng Anh Owin">
+                    </div>
+                    <div class="info-content">
+                        <h3>THÀNH TỰU NỔI BẬT</h3>
+                        <p>Chúng tôi là đơn vị tiên phong trong thiết kế và thi công cửa gỗ cao cấp, mang đến giải pháp hoàn hảo cho mọi không gian sống.</p>
+                        <ul class="info-features">
+                            <li>🏠 Hàng trăm công trình đã hoàn thiện</li>
+                            <li>🖼️ Showroom trưng bày thực tế</li>
+                            <li>🏗️ Xưởng lớn, chủ động chất lượng</li>
+                            <li>🧰 Thợ lành nghề trên 10 năm kinh nghiệm</li>
+                            <li>🛠️ Máy CNC Châu Âu – sản phẩm tinh xảo, bền vững</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-content">
+                        <h3>VỊ TRÍ THUẬN TIỆN</h3>
+                        <p>Showroom đặt tại vị trí trung tâm, kết nối thuận tiện các quận và khu vực lân cận.</p>
+                        <ul class="info-features">
+                            <li>📍 Địa chỉ dễ tìm, giao thông thuận lợi</li>
+                            <li>🚗 Bãi đỗ xe rộng rãi</li>
+                            <li>🕐 Mở cửa 7 ngày/tuần</li>
+                            <li>📞 Hỗ trợ tư vấn 24/7</li>
+                        </ul>
+                    </div>
+                    <div class="info-image">
+                        <img src="assets/images/map.jpg" alt="Vị trí Hoàng Anh Owin">
+                    </div>
+                </div>
+            `;
+
+            // Contact info
+            const contactInfo = document.getElementById('contact-info');
+            const serviceContactInfo = document.getElementById('service-contact-info');
+            const contactHTML = `
+                <h4>📞 LIÊN HỆ ĐẶT HÀNG</h4>
+                <p style="margin: 10px 0;">Hotline: 0799.040.616</p>
+                <p>Email: hoanganh23476@gmail.com</p>
+                <a href="https://zalo.me/0799040616" target="_blank">
+                    <button class="btn" style="margin-top: 15px;">💬 Liên Hệ Qua Zalo</button>
+                </a>
+            `;
+            contactInfo.innerHTML = contactHTML;
+            serviceContactInfo.innerHTML = contactHTML.replace('ĐẶT HÀNG', 'NGAY');
+
+            // Footer content
+            const footerContent = document.getElementById('footer-content');
+            footerContent.innerHTML = `
+                <p>&copy; 2025 Hoàng Anh OWIN Hà Tĩnh</p>
+                <p>📞 0799.040.616 | 📧 hoanganh23476@gmail.com</p>
+            `;
+        }
 const productData = {
     'cua-chinh': {
         title: 'SẢN PHẨM CỬA CHÍNH',
@@ -590,7 +739,7 @@ function performSearch(query) {
 
                         // Safe property access with fallbacks
                         const productName = (product.ten || '').toLowerCase();
-                        const productMaterial = (product.chatlieu || '').toLowerCase();
+                        const productMaterial = (product.chatlieuphu || '').toLowerCase();
                         const productCategory = (product.loai || '').toLowerCase();
                         const productDesc = (product.mota || '').toLowerCase();
 
